@@ -1,0 +1,51 @@
+.logged-user {
+    width: 300px;
+    height: 25px;
+    margin-top:50px;
+}
+
+.report-item {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+
+.gray-background {
+    background-color: lightgray !important;
+}
+
+.status-box {
+    background-color: rgb(245, 242, 242);
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    max-width: 300px;
+    max-height: 150px;
+    padding: 10px;
+}
+
+.upper-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.upper-leftContent{
+    flex-direction: column;
+    justify-content: left;
+}
+
+.content {
+    margin: auto;
+    width: 80%;
+}
+
+.full-width {
+    width: 100%;
+}

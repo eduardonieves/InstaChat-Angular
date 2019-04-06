@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="upper-content">
+    <div class="logged-user">
+      <div class="upper-leftContent">
+      <h4> Logged as: {{username}}</h4>
+      <button mat-raised-button color="accent" (click)="logout()">Log out</button>
+    </div>
+    </div>
+
+    <div class="status-box">
+      <h4>Latest Status</h4>
+      <h5>Current Server: {{serverCount}}</h5>
+      <h5>Assets added on latest report: {{serverAdds}}</h5>
+      <h5>Deleted on latest report: {{serverDeletes}}</h5>
+    </div>
+  </div>
+
+  <div style="margin-top:25px;">
+    <h2>Latest Reports</h2>
+    <div class="report-item">
+        <div class="full-width">
+            <h4>Date</h4>
+        </div>
+        <div class="full-width">
+            <h4>Status</h4>
+        </div>
+        <div class="full-width">
+            <h4>Type</h4>
+        </div>
+    </div>
+    <div *ngFor="let rep of reports; index as i" class="report-item gray-background" [class.gray-background]="applyGray(i)">
+      <div class="full-width">
+        <h5>{{rep.timestamp.toLocaleString()}}</h5>
+      </div>
+      <div class="full-width">
+        <h5>{{rep.filename}}</h5>
+      </div>
+      <div class="full-width">
+        <h5>{{rep.type_name}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
