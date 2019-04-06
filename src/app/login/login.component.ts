@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RemoteServerService } from './../bussiness-logic/remote-server.service';
 import { NotificationService } from './../bussiness-logic/notifications.service';
+import { User } from './../bussiness-logic/User';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
 
 @Component({
@@ -20,6 +21,7 @@ export class LoginComponent implements OnInit {
     oldPassword: string;
     newPassword: string;
     confirmNewPassword: string;
+  public users: User[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -44,6 +46,26 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.username = '';
         this.password = '';
+
+
+      this.server.getUsers().subscribe(
+        data => {
+          // console.log(data);
+
+          data.forEach(item => {
+            this.users.push(item);
+          });
+          console.log(this.users);
+
+        },
+        error => {
+          console.log(error);
+          if (error.status === 403) {
+            this.router.navigate(['login']);
+          }
+          this.notifications.httpError(error);
+        }
+      );
     }
 
     login() {

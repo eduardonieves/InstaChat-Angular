@@ -128,7 +128,7 @@ export class RemoteServerService {
     };
 
     return this.http.post(
-      'http://cadex.ece.uprm.edu/api/upload/',
+      '',
       data, options
     );
   }
