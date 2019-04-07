@@ -4,6 +4,13 @@
     margin-top:50px;
 }
 
+/*.navbar {*/
+  /*-webkit-box-shadow: 0 8px 8px -8px #185bb4;*/
+/*-moz-box-shadow: 0 8px 8px -8px #185bb4;*/
+/*box-shadow: 0 8px 8px -8px #185bb4;*/
+/*}*/
+
+
 .report-item {
     padding: 10px;
     display: flex;

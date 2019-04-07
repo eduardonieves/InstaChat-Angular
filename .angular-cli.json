@@ -19,6 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        {
+          "input": "src/my-theme.scss"
+        },
         "styles.css"
       ],
       "scripts": [],
@@ -54,7 +57,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   }
 }

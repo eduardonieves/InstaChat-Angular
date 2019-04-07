@@ -4,10 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {
   MatInputModule,
   MatButtonModule,
   MatSelectModule,
+  MatListModule,
+  MatToolbarModule,
   MatIconModule,
   MatCheckboxModule,
   MatSnackBarModule,
@@ -46,7 +49,7 @@ const appRoutes: Routes = [
       name: 'Home',
       title: 'Home'
     }, children: [
-      { path: 'home', component: HomeComponent }
+      { path: '', component: HomeComponent }
     ]
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -64,10 +67,13 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MatInputModule,
+    MatToolbarModule,
     MatButtonModule,
+    MatListModule,
     MatSelectModule,
     MatDialogModule,
     MatProgressBarModule,
@@ -92,7 +98,9 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatSnackBarModule,
     MatCardModule,
+    MatToolbarModule,
     MatProgressBarModule,
+    MatListModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatTableModule,

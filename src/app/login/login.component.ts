@@ -65,19 +65,20 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.loading = true;
-        this.server.login(this.username, this.password).subscribe(
-            res => {
-                this.loading = false;
-                this.router.navigate([this.returnUrl]);
-            },
-            error => {
-                console.log(error);
-                this.loading = false;
-                this.password = '';
-                this.notifications.httpError(error);
-            }
-        );
+      this.router.navigate(['home']);
+        // this.loading = true;
+        // this.server.login(this.username, this.password).subscribe(
+        //     res => {
+        //         this.loading = false;
+        //         this.router.navigate([this.returnUrl]);
+        //     },
+        //     error => {
+        //         console.log(error);
+        //         this.loading = false;
+        //         this.password = '';
+        //         this.notifications.httpError(error);
+        //     }
+        // );
     }
 
     showRegister() {

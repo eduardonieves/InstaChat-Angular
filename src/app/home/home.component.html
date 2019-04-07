@@ -1,43 +1,47 @@
-<div class="content">
-  <div class="upper-content">
-    <div class="logged-user">
-      <div class="upper-leftContent">
-      <h4> Logged as: {{username}}</h4>
-      <button mat-raised-button color="accent" (click)="logout()">Log out</button>
-    </div>
-    </div>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
 
-    <div class="status-box">
-      <h4>Latest Status</h4>
-      <h5>Current Server: {{serverCount}}</h5>
-      <h5>Assets added on latest report: {{serverAdds}}</h5>
-      <h5>Deleted on latest report: {{serverDeletes}}</h5>
-    </div>
-  </div>
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
 
-  <div style="margin-top:25px;">
-    <h2>Latest Reports</h2>
-    <div class="report-item">
-        <div class="full-width">
-            <h4>Date</h4>
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Basic dropdown<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
         </div>
-        <div class="full-width">
-            <h4>Status</h4>
-        </div>
-        <div class="full-width">
-            <h4>Type</h4>
-        </div>
-    </div>
-    <div *ngFor="let rep of reports; index as i" class="report-item gray-background" [class.gray-background]="applyGray(i)">
-      <div class="full-width">
-        <h5>{{rep.timestamp.toLocaleString()}}</h5>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+    <!-- Search form -->
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
       </div>
-      <div class="full-width">
-        <h5>{{rep.filename}}</h5>
-      </div>
-      <div class="full-width">
-        <h5>{{rep.type_name}}</h5>
-      </div>
-    </div>
-  </div>
-</div>
+    </form>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
