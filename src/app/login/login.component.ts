@@ -50,12 +50,12 @@ export class LoginComponent implements OnInit {
 
       this.server.getUsers().subscribe(
         data => {
-          // console.log(data);
+           console.log(data);
 
           data.forEach(item => {
             this.users.push(item);
           });
-          console.log(this.users);
+        //  console.log(this.users);
 
         },
         error => {

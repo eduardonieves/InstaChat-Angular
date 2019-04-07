@@ -47,16 +47,16 @@ export class RemoteServerService {
 
   public getHome(): Observable<Object> {
     return this.http.get(
-      'http:/localhost:5000/InstaChat/home/',
+      'http://localhost:5000/InstaChat/home/',
       this.getModifiedHeader()
     );
   }
 
   public getUsers(): Observable<User[]> {
+    
     return this.http
       .get<User[]>(
-        'http:/localhost:5000/InstaChat/users/',
-        this.getModifiedHeader()
+        "http://localhost:5000/InstaChat/users"
       )
       .pipe(map(data => User.fromList(data['Users'])));
   }
