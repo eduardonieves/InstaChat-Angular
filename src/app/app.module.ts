@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {
   MatInputModule,
   MatButtonModule,
@@ -29,19 +29,24 @@ import { CovalentStepsModule  } from '@covalent/core/steps';
 
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent} from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RemoteServerService } from './bussiness-logic/remote-server.service';
 import { AuthGuard } from './bussiness-logic/auth-guard.service';
 import { NotificationService } from './bussiness-logic/notifications.service';
-
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 import { AppComponent } from './app.component';
 
 
+
+
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, data: { name: 'Login' } },
+  { path: 'profile', component: ProfileComponent, data: { name: 'Profile' } },
+  { path: 'dashboard', component: DashboardComponent, data: { name: 'Dashboard' } },
   // { path: 'register', component: RegisterComponent },
   // { path: 'admin', redirectTo: '/admin/home', pathMatch: 'full' },
   {
@@ -52,7 +57,7 @@ const appRoutes: Routes = [
       { path: '', component: HomeComponent }
     ]
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/profile', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -64,10 +69,12 @@ const appRoutes: Routes = [
     HeaderComponent,
     PageNotFoundComponent,
     HomeComponent,
+    ProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
-    MDBBootstrapModule.forRoot(),
+    // MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     NoopAnimationsModule,
     MatInputModule,

@@ -60,6 +60,12 @@ export class RemoteServerService {
       );
   }
 
+  public getSingleUser(): Observable<User> {
+    return this.http
+      .get<User>(
+        'http://localhost:5000/InstaChat/users/1');
+  }
+
   public login(email: string, password: string) {
     const body = {
       email: email,

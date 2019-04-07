@@ -47,6 +47,20 @@ export class LoginComponent implements OnInit {
         this.username = '';
         this.password = '';
 
+      this.server.getSingleUser().subscribe(
+        data => {
+          console.log(data);
+          localStorage.setItem('first_name', data['User']['first_name']);
+          localStorage.setItem('last_name', data['User']['last_name']);
+          localStorage.setItem('user_id', data['User']['user_id']);
+          localStorage.setItem('u_email_address', data['User']['u_email_address']);
+          localStorage.setItem('phone', data['User']['phone']);
+        },
+        error => {
+          console.log(error);
+          this.notifications.httpError(error);
+        }
+      );
 
       this.server.getUsers().subscribe(
         data => {
@@ -65,7 +79,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-      this.router.navigate(['home']);
+      this.router.navigate(['profile']);
         // this.loading = true;
         // this.server.login(this.username, this.password).subscribe(
         //     res => {
