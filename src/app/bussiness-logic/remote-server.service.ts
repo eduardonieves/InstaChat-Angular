@@ -23,6 +23,10 @@ import { map, catchError } from 'rxjs/operators';
 // import { UploadedFiles, ServerFile } from './../models/UploadedFiles';
 // import { Response } from './../models/RemoteResponse';
 import { User } from './User';
+import {Posts} from './Posts';
+import {DashboardPost} from '../dashboard/dashboard.component';
+import {DashboardHashtag} from '../dashboard/dashboard.component';
+
 @Injectable()
 export class RemoteServerService {
   constructor(private http: HttpClient) { }
@@ -65,6 +69,21 @@ export class RemoteServerService {
       .get<User>(
         'http://localhost:5000/InstaChat/users/1');
   }
+
+  public getDashboardPosts(): Observable<DashboardPost[]> {
+    return this.http
+      .get<DashboardPost[]>(
+        'http://localhost:5000/InstaChat/dashboard/posts'
+      );
+  }
+
+  public getTrendingHashtags(date: string): Observable<DashboardHashtag[]> {
+    return this.http
+      .get<DashboardHashtag[]>(
+        'http://localhost:5000/InstaChat/dashboard/' + date + '/hashtags'
+      );
+  }
+
 
   public login(email: string, password: string) {
     const body = {

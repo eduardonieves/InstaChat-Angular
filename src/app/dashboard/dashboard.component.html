@@ -1,3 +1,29 @@
-<p>
-  dashboard works!
-</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>
+    Dashboard
+    </span>
+    <span class="example-spacer"></span>
+    <button mat-button (click)="goToProfile()">Profile</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Posts Per Day</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.post_date}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="posts">
+        <mat-header-cell *matHeaderCellDef> Posts </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.post_count}} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
+
