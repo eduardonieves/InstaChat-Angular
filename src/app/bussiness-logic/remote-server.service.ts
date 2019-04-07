@@ -47,7 +47,7 @@ export class RemoteServerService {
 
   public getHome(): Observable<Object> {
     return this.http.get(
-      'http:/localhost:5000/InstaChat/home/',
+      'http:/localhost:5000/InstaChat/',
       this.getModifiedHeader()
     );
   }
@@ -67,7 +67,7 @@ export class RemoteServerService {
       password: password
     };
     return this.http
-      .post('http:/localhost:5000/InstaChat/login/', body, { headers: this.head })
+      .post('http:/localhost:5000/InstaChat/login', body, { headers: this.head })
       .pipe(
         map(res => {
           this.loggedIn = true;
