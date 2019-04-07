@@ -1,18 +1,19 @@
 export class User {
   constructor(
-    public email: string,
-    public firstName: string,
-    public lastName: string,
-    public userId: string,
-    public userName: string
+    public u_email_address: string,
+    public first_name: string,
+    public last_name: string,
+    public user_id: string,
+    public password: string,
   ) { }
 
   static fromJSON(json: Object): User {
     return new User(
-      json['email'],
-      json['firstName'],
-      json['lastName'],
-      json['userId'], json['firstName'] + ' ' + json['lastName']
+      json['first_name'],
+      json['last_name'],
+      json['user_id'],
+      json['u_email_address'],
+      json['password']
     );
   }
 

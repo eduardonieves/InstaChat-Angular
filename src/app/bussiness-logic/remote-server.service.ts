@@ -47,7 +47,7 @@ export class RemoteServerService {
 
   public getHome(): Observable<Object> {
     return this.http.get(
-      'http:/localhost:5000/InstaChat/',
+      'http://localhost:5000/InstaChat/home/',
       this.getModifiedHeader()
     );
   }
@@ -55,10 +55,9 @@ export class RemoteServerService {
   public getUsers(): Observable<User[]> {
     return this.http
       .get<User[]>(
-        'http:/localhost:5000/InstaChat/users/',
-        this.getModifiedHeader()
-      )
-      .pipe(map(data => User.fromList(data['Users'])));
+        'http://localhost:5000/InstaChat/users'
+        // .pipe(map(data => User.fromList(data['Users'])));
+      );
   }
 
   public login(email: string, password: string) {
@@ -67,7 +66,7 @@ export class RemoteServerService {
       password: password
     };
     return this.http
-      .post('http:/localhost:5000/InstaChat/login', body, { headers: this.head })
+      .post('http:/localhost:5000/InstaChat/login/', body, { headers: this.head })
       .pipe(
         map(res => {
           this.loggedIn = true;
