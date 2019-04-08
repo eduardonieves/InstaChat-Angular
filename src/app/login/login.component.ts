@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
     oldPassword: string;
     newPassword: string;
     confirmNewPassword: string;
+
+    contactList: User[];
   public users: User[] = [];
 
     constructor(
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.username = '';
         this.password = '';
 
-      this.server.getSingleUser().subscribe(
+      this.server.getSingleUser('1').subscribe(
         data => {
           console.log(data);
           localStorage.setItem('first_name', data['User']['first_name']);
@@ -65,8 +67,9 @@ export class LoginComponent implements OnInit {
       this.server.getUsers().subscribe(
         data => {
             this.users = data;
-            console.log(this.users);
 
+          this.contactList = data['User'];
+          console.log(this.contactList);
         },
         error => {
           console.log(error);
@@ -76,7 +79,15 @@ export class LoginComponent implements OnInit {
           this.notifications.httpError(error);
         }
       );
-    }
+    this.server.getUserContacts('1').subscribe(
+      data => {
+        console.log(data);
+        this.contactList = data['User'];
+      }
+    );
+}
+
+
 
     login() {
       this.router.navigate(['profile']);

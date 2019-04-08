@@ -4,6 +4,8 @@ export class Posts {
     public post_date: string,
     public user_id: string,
     public post_id: string,
+    public likes: number,
+    public dislikes: number
 
   ) { }
 
@@ -12,7 +14,9 @@ export class Posts {
       json['post_caption'],
       json['post_date'],
       json['post_id'],
-      json['user_id']
+      json['user_id'],
+      0,
+      0
     );
   }
 

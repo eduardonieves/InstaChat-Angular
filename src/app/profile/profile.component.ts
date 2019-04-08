@@ -4,6 +4,9 @@ import { RemoteServerService } from './../bussiness-logic/remote-server.service'
 import { NotificationService } from './../bussiness-logic/notifications.service';
 import { User } from './../bussiness-logic/User';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
+import {DataSource} from '@angular/cdk/table';
+import {Observable} from 'rxjs/Observable';
+import {DashboardPost, DashboardPostDataSource} from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +18,10 @@ export class ProfileComponent implements OnInit {
   public user = new User(localStorage.getItem('first_name'), localStorage.getItem('last_name'), localStorage.getItem('user_id')
   , localStorage.getItem('u_email_address'), localStorage.getItem('phone'));
 
+  dataSource: UserContactsDataSource;
+  contactList: User[];
+  // dataSource = new UserContactsDataSource(this.server);
+  displayedColumns = ['Name', 'u_email_address'];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -25,6 +32,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.user);
+
+    this.server.getUserContacts(localStorage.getItem('user_id')).subscribe(
+      data => {
+        console.log(data);
+
+        this.dataSource = new UserContactsDataSource(this.server);
+        this.dataSource = data['User'];
+       // this.contactList = data['User'];
+      }
+    );
+    // this.contactsSource = this.user;
   }
 
   goToProfile() {
@@ -36,4 +54,14 @@ export class ProfileComponent implements OnInit {
   goToChats() {
     this.router.navigate(['chatsList']);
   }
+}
+export class UserContactsDataSource extends DataSource<any> {
+  constructor(private contactsService: RemoteServerService) {
+    super();
+  }
+  connect(): Observable<User[]> {
+    console.log('Here');
+    return this.contactsService.getUserContacts(localStorage.getItem('user_id'));
+  }
+  disconnect() {}
 }

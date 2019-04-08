@@ -41,6 +41,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppComponent } from './app.component';
 import { ChatsListComponent } from './chatsList/chatsList.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatInfoComponent } from './chat-info/chat-info.component';
 
 
 
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, data: { name: 'Dashboard' } },
   { path: 'chatsList', component: ChatsListComponent, data: { name: 'Chats' } },
   { path: 'chatsList/chat/:id', component: ChatComponent, data: { name: 'Chat'} },
+  { path: 'chatsList/chat/chatInfo/:id', component: ChatInfoComponent, data: { name: 'ChatInfo'} },
 
   // { path: 'register', component: RegisterComponent },
   // { path: 'admin', redirectTo: '/admin/home', pathMatch: 'full' },
@@ -78,6 +80,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     ChatsListComponent,
     ChatComponent,
+    ChatInfoComponent,
   ],
   imports: [
     BrowserModule,

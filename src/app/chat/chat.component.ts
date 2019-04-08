@@ -7,6 +7,8 @@ import {Chats} from '../bussiness-logic/Chats';
 import { User } from './../bussiness-logic/User';
 import { Observable } from 'rxjs/Observable';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
+import {Posts} from '../bussiness-logic/Posts';
+import {DashboardPost} from '../dashboard/dashboard.component';
 
 
 @Component({
@@ -18,6 +20,8 @@ export class ChatComponent implements OnInit {
 
   id: string;
   chat: Chats;
+  postList: Posts[];
+  postResults: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,18 +41,26 @@ export class ChatComponent implements OnInit {
     this.server.getChatById(this.id).subscribe(
       data => {
           console.log(data['Chat']);
-        // this.chat = data['Chat'];
+          this.chat = data['Chat'];
+
         // console.log(this.chatlist);
       });
 
+    this.server.getChatPosts(this.id).subscribe(
+      data => {
+        console.log(data['Posts']);
+        this.postList = data['Posts'];
+      }
+    );
+
+  }
+
+  showChatInfo(id: string) {
+    this.router.navigate(['chatsList/chat/chatInfo', this.chat.chat_id]);
   }
 
   goToChats() {
     this.router.navigate(['chatsList']);
-  }
-  goToChat(id: string) {
-    console.log(id);
-    this.router.navigate(['chatsList/chat/', id ]);
   }
   goToProfile() {
     this.router.navigate(['profile']);
@@ -56,4 +68,13 @@ export class ChatComponent implements OnInit {
   goToDashboard() {
     this.router.navigate(['dashboard']);
   }
+}
+export class MembersDataSource extends DataSource<any> {
+  constructor(private membersService: RemoteServerService) {
+    super();
+  }
+  connect(): Observable<User[]> {
+    return this.membersService.getUsers();
+  }
+  disconnect() {}
 }

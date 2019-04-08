@@ -65,11 +65,20 @@ export class RemoteServerService {
       );
   }
 
-  public getSingleUser(): Observable<User> {
+  public getSingleUser(id: string): Observable<User> {
     return this.http
       .get<User>(
-        'http://localhost:5000/InstaChat/users/1');
+        'http://localhost:5000/InstaChat/users/' + id );
   }
+
+
+  public getUserContacts(id: string): Observable<User[]> {
+    return this.http
+      .get<User[]>(
+        'http://localhost:5000/InstaChat/users/' + id + '/contacts');
+  }
+
+
 
   public getDashboardPosts(): Observable<DashboardPost[]> {
     return this.http
@@ -85,6 +94,15 @@ export class RemoteServerService {
   public getChatById(id: string): Observable<Chats> {
     return this.http.get<Chats>('http://localhost:5000/InstaChat/chats/' + id );
   }
+
+  public getChatPosts(id: string): Observable<Posts> {
+    return this.http.get<Posts>('http://localhost:5000/InstaChat/chats/' + id + '/posts' );
+  }
+
+  public getPostsReactions(id: string): Observable<Posts> {
+    return this.http.get<Posts>('http://localhost:5000/InstaChat/posts' + id + '/reactions' );
+  }
+
 
   public getTrendingHashtags(date: string): Observable<DashboardHashtag[]> {
     return this.http
