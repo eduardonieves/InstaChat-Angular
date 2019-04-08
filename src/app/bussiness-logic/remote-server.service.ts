@@ -26,6 +26,7 @@ import { User } from './User';
 import {Posts} from './Posts';
 import {DashboardPost} from '../dashboard/dashboard.component';
 import {DashboardHashtag} from '../dashboard/dashboard.component';
+import {Chats} from './Chats';
 
 @Injectable()
 export class RemoteServerService {
@@ -75,6 +76,14 @@ export class RemoteServerService {
       .get<DashboardPost[]>(
         'http://localhost:5000/InstaChat/dashboard/posts'
       );
+  }
+
+  public getAllChats(): Observable<Chats[]> {
+    return this.http.get<Chats[]>('http://localhost:5000/InstaChat/chats');
+  }
+
+  public getChatById(id: string): Observable<Chats> {
+    return this.http.get<Chats>('http://localhost:5000/InstaChat/chats/' + id );
   }
 
   public getTrendingHashtags(date: string): Observable<DashboardHashtag[]> {

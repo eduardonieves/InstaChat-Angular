@@ -94,6 +94,9 @@ export class LoginComponent implements OnInit {
         //     }
         // );
     }
+  goToChats() {
+    this.router.navigate(['chats']);
+  }
 
     showRegister() {
         this.router.navigate(['/register']);

@@ -1,19 +1,23 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RemoteServerService } from './../bussiness-logic/remote-server.service';
+import {DataSource} from '@angular/cdk/collections';
 import { NotificationService } from './../bussiness-logic/notifications.service';
+import {Chats} from '../bussiness-logic/Chats';
 import { User } from './../bussiness-logic/User';
+import { Observable } from 'rxjs/Observable';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
 
-@Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
-})
-export class ProfileComponent implements OnInit {
 
-  public user = new User(localStorage.getItem('first_name'), localStorage.getItem('last_name'), localStorage.getItem('user_id')
-  , localStorage.getItem('u_email_address'), localStorage.getItem('phone'));
+@Component({
+  selector: 'app-messages',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.scss']
+})
+export class ChatComponent implements OnInit {
+
+  id: string;
+  chat: Chats;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,16 +28,32 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.user);
+
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    console.log(this.id);
+
+    this.server.getChatById(this.id).subscribe(
+      data => {
+          console.log(data['Chat']);
+        // this.chat = data['Chat'];
+        // console.log(this.chatlist);
+      });
+
   }
 
+  goToChats() {
+    this.router.navigate(['chatsList']);
+  }
+  goToChat(id: string) {
+    console.log(id);
+    this.router.navigate(['chatsList/chat/', id ]);
+  }
   goToProfile() {
     this.router.navigate(['profile']);
   }
   goToDashboard() {
     this.router.navigate(['dashboard']);
-  }
-  goToChats() {
-    this.router.navigate(['chatsList']);
   }
 }

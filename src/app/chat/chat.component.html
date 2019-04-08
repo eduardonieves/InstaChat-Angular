@@ -1,19 +1,11 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>
-    My Profile
+    My Chats
     </span>
     <span class="example-spacer"></span>
     <button mat-button (click)="goToProfile()">Profile</button>
     <button mat-button (click)="goToDashboard()">Dashboard</button>
     <button mat-button (click)="goToChats()">Chats</button>
-
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{user.first_name + ' ' + user.last_name }}</mat-card-title>
-    <mat-card-subtitle>{{user.u_email_address}}</mat-card-subtitle>
-    <mat-card-subtitle>{{user.phone}}</mat-card-subtitle>
-  </mat-card-header>
-</mat-card>

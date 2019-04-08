@@ -3,17 +3,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { RemoteServerService } from './../bussiness-logic/remote-server.service';
 import { NotificationService } from './../bussiness-logic/notifications.service';
 import { User } from './../bussiness-logic/User';
+import {Chats} from '../bussiness-logic/Chats';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-chats',
+  templateUrl: './chatsList.component.html',
+  styleUrls: ['./chatsList.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ChatsListComponent implements OnInit {
 
-  public user = new User(localStorage.getItem('first_name'), localStorage.getItem('last_name'), localStorage.getItem('user_id')
-  , localStorage.getItem('u_email_address'), localStorage.getItem('phone'));
+  chatlist: Chats[];
 
   constructor(
     private route: ActivatedRoute,
@@ -21,19 +21,26 @@ export class ProfileComponent implements OnInit {
     private server: RemoteServerService,
     private notifications: NotificationService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
-    console.log(this.user);
+
+    this.server.getAllChats().subscribe(
+      data => {
+      //  console.log(data);
+        this.chatlist = data['Chat'];
+        console.log(this.chatlist);
+  });
   }
 
+  goToChat(id: string) {
+    console.log(id);
+    this.router.navigate(['chatsList/chat/', id ]);
+  }
   goToProfile() {
     this.router.navigate(['profile']);
   }
   goToDashboard() {
     this.router.navigate(['dashboard']);
-  }
-  goToChats() {
-    this.router.navigate(['chatsList']);
   }
 }

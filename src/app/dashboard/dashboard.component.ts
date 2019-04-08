@@ -49,11 +49,11 @@ export class DashboardComponent implements OnInit {
         this.results = data['Post'];
          console.log(this.results);
         this.results.forEach(item => {
-          const subString = item['post_date'].split('/').join('');
-          // subString.replace('/','');
-          console.log(subString);
+          // const subString = item['post_date'].split('/').join('');
+          // // subString.replace('/','');
+          // console.log(subString);
 
-          this.server.getTrendingHashtags(subString).subscribe(
+          this.server.getTrendingHashtags(item['post_date']).subscribe(
             data2 => {
               console.log(data2);
             });
@@ -67,8 +67,15 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
   goToProfile() {
     this.router.navigate(['profile']);
+  }
+  goToDashboard() {
+    this.router.navigate(['dashboard']);
+  }
+  goToChats() {
+    this.router.navigate(['chatsList']);
   }
 }
 export class DashboardPostDataSource extends DataSource<any> {
