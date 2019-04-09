@@ -11,7 +11,11 @@
 </mat-toolbar>
   <mat-list class="list">
     <mat-list-item (click)="goToChat(chat.chat_id)" style= "background-color:#f6f8f4" *ngFor="let chat of chatlist">
-      <h4 mat-line><h4>{{chat.chat_name}}</h4></h4>
+
+      <h4 mat-line><h4>Name: {{chat.chat_name}}</h4></h4>
+      <p matLine> Id: {{chat.chat_id}} </p>
+      <p matLine> Owner Id: {{chat.owner_id}} </p>
+
       <!--<p mat-line><span> {{chat.number_of_users}} </span></p>-->
       <mat-divider></mat-divider>
     </mat-list-item>
