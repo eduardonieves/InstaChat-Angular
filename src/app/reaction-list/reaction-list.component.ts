@@ -9,6 +9,7 @@ import {User} from '../bussiness-logic/User';
 import {DataSource} from '@angular/cdk/table';
 import {Observable} from 'rxjs/Observable';
 import {Posts} from '../bussiness-logic/Posts';
+import {UserContactsDataSource} from '../profile/profile.component';
 
 
 export interface  Reaction {
@@ -56,8 +57,9 @@ export class ReactionListComponent implements OnInit {
 
     this.server.getPostUserReactions(this.id, 'like').subscribe(
       data => {
-       console.log(data);
-      // this.chat = data['Chat'];
+       console.log(data['User']);
+       // this.chat = data['Chat'][];
+      //  this.dataSource = new ReactsSource(this.server, ,'like');
 
       });
   }

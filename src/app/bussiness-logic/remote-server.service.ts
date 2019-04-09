@@ -107,8 +107,8 @@ export class RemoteServerService {
     return this.http.get<Posts>('http://localhost:5000/InstaChat/posts/' + post_id + '/reacts/' + react_type );
   }
 
-  public getPostUserReactions(post_id: string, react_type: string): Observable<User> {
-    return this.http.get<User>('http://localhost:5000/InstaChat/users/posts/' + post_id + '/' + react_type );
+  public getPostUserReactions(post_id: string, react_type: string): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:5000/InstaChat/users/posts/' + post_id + '/' + react_type );
   }
 
 
