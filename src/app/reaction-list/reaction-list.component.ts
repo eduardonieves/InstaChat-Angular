@@ -57,9 +57,16 @@ export class ReactionListComponent implements OnInit {
 
     this.server.getPostUserReactions(this.id, 'like').subscribe(
       data => {
-       console.log(data['User']);
-       // this.chat = data['Chat'][];
-      //  this.dataSource = new ReactsSource(this.server, ,'like');
+        console.log(data['User']);
+        // this.chat = data['Chat'][];
+       // this.dataSource = new ReactsSource(this.server, this.id , 'like');
+
+      });
+    this.server.getPostUserReactions(this.id, 'dislike').subscribe(
+      data => {
+        console.log(data['User']);
+        // this.chat = data['Chat'][];
+       // this.dataSource = new ReactsSource(this.server, this.id , 'like');
 
       });
   }
@@ -79,12 +86,12 @@ export class ReactionListComponent implements OnInit {
 
 }
 export class ReactsSource extends DataSource<any> {
-  constructor(private reactService: RemoteServerService, private post: Posts, private type: string) {
+  constructor(private reactService: RemoteServerService, private post_id: string, private type: string) {
     super();
   }
   connect(): Observable<User[]> {
 
-    return this.reactService.getPostUserReactions(this.post.post_id, this.type);
+    return this.reactService.getPostUserReactions(this.post_id, this.type);
   //  return data;
   }
   disconnect() {}
