@@ -42,7 +42,6 @@ export class ChatComponent implements OnInit {
           console.log(data['Chat']);
           this.chat = data['Chat'];
 
-        // console.log(this.chatlist);
       });
 
     this.server.getChatPosts(this.id).subscribe(
@@ -59,6 +58,54 @@ export class ChatComponent implements OnInit {
             item['post_caption'] = caption + ' #' + hashtag;
           }
         });
+
+
+        this.postList.forEach(item => {
+          this.server.getPostsReactions(item['post_id'], 'like').subscribe(
+            data2 => {
+              const filteredData = data2['User'][0];
+              const likes = filteredData['Total_of_likes'];
+              if ( likes == null) {
+                item['likes'] = 0;
+              } else {
+                item['likes'] = likes;
+              }
+            },
+            error => {
+              item['likes'] = 0;
+            });
+        });
+
+        this.postList.forEach(item => {
+          this.server.getPostsReactions(item['post_id'], 'dislike').subscribe(
+            data3 => {
+              const filteredData = data3['User'][0];
+              const dislikes = filteredData['Total_of_dislikes'];
+              item['dislikes'] = dislikes;
+
+            },
+            error => {
+              item['dislikes'] = 0;
+            });
+        });
+
+        this.postList.forEach(item => {
+          this.server.getSingleUser(item.p_created_by).subscribe(
+            data4 => {
+              console.log(data4['User']);
+              const user = data4['User'];
+              item['username'] = user['first_name'] + ' ' + user['last_name'];
+
+            },
+            error => {
+              console.log(error);
+              this.notifications.httpError(error);
+            }
+          );
+        });
+
+        console.log(this.postList);
+
 
 
       }

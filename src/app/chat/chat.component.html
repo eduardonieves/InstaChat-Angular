@@ -13,7 +13,7 @@
 <mat-list>
   <mat-list-item *ngFor="let post of postList">
     <!--<h3 matLine> {{post.post_caption}} </h3>-->
-    <p matLine> {{post.post_caption}} </p>
+    <p matLine> {{post.username + ': ' + post.post_caption}} </p>
     <p matLine> {{post.post_date}} </p>
     <p matLine> Likes: {{post.likes}}  Dislikes: {{post.dislikes}} </p>
 
