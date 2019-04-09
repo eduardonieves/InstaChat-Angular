@@ -16,7 +16,7 @@ import {DashboardPost, DashboardPostDataSource} from '../dashboard/dashboard.com
 export class ProfileComponent implements OnInit {
 
   public user = new User(localStorage.getItem('first_name'), localStorage.getItem('last_name'), localStorage.getItem('user_id')
-  , localStorage.getItem('u_email_address'), localStorage.getItem('phone'));
+  , localStorage.getItem('u_email_address'), localStorage.getItem('phone'), localStorage.getItem('username'));
 
   dataSource: UserContactsDataSource;
   contactList: User[];

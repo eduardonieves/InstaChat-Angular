@@ -11,13 +11,10 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-list>
-  <mat-list-item *ngFor="let post of postList">
-    <!--<h3 matLine> {{post.post_caption}} </h3>-->
+  <mat-list-item (click)="showPostReactions(post.post_id)" *ngFor="let post of postList">
     <p matLine> {{post.username + ': ' + post.post_caption}} </p>
     <p matLine> {{post.post_date}} </p>
     <p matLine> Likes: {{post.likes}}  Dislikes: {{post.dislikes}} </p>
-
     <mat-divider></mat-divider>
-    <!--<p matLine class="demo-2"> {{message.content}} </p>-->
   </mat-list-item>
 </mat-list>

@@ -79,6 +79,7 @@ export class ChatComponent implements OnInit {
         this.postList.forEach(item => {
           this.server.getPostsReactions(item['post_id'], 'dislike').subscribe(
             data3 => {
+              console.log(data3);
               const filteredData = data3['User'][0];
               const dislikes = filteredData['Total_of_dislikes'];
               item['dislikes'] = dislikes;
@@ -110,6 +111,12 @@ export class ChatComponent implements OnInit {
 
       }
     );
+
+  }
+
+  showPostReactions(post_id: string) {
+    console.log('clicked: ' + post_id );
+    this.router.navigate(['chatsList/chat/' + this.chat.chat_id + '/reactions/', post_id]);
 
   }
 

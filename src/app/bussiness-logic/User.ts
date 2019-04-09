@@ -5,6 +5,7 @@ export class User {
     public user_id: string,
     public u_email_address: string,
     public phone: string,
+    public username: string
 
   ) { }
 
@@ -14,7 +15,8 @@ export class User {
       json['last_name'],
       json['user_id'],
       json['u_email_address'],
-      json['phone']
+      json['phone'],
+      json['username']
     );
   }
 

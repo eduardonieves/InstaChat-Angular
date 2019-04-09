@@ -42,6 +42,7 @@ import { AppComponent } from './app.component';
 import { ChatsListComponent } from './chatsList/chatsList.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatInfoComponent } from './chat-info/chat-info.component';
+import { ReactionListComponent } from './reaction-list/reaction-list.component';
 
 
 
@@ -53,6 +54,7 @@ const appRoutes: Routes = [
   { path: 'chatsList', component: ChatsListComponent, data: { name: 'Chats' } },
   { path: 'chatsList/chat/:id', component: ChatComponent, data: { name: 'Chat'} },
   { path: 'chatsList/chat/chatInfo/:id', component: ChatInfoComponent, data: { name: 'ChatInfo'} },
+  { path: 'chatsList/chat/:id/reactions/:post_id', component: ReactionListComponent, data: { name: 'ReactionsList'} },
 
   // { path: 'register', component: RegisterComponent },
   // { path: 'admin', redirectTo: '/admin/home', pathMatch: 'full' },
@@ -81,6 +83,7 @@ const appRoutes: Routes = [
     ChatsListComponent,
     ChatComponent,
     ChatInfoComponent,
+    ReactionListComponent,
   ],
   imports: [
     BrowserModule,
