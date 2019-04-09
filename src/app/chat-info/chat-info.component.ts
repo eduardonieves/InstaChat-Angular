@@ -4,7 +4,10 @@ import {RemoteServerService} from '../bussiness-logic/remote-server.service';
 import {NotificationService} from '../bussiness-logic/notifications.service';
 import {MatDialog} from '@angular/material';
 import {Chats} from '../bussiness-logic/Chats';
-import {DashboardPostDataSource} from '../dashboard/dashboard.component';
+import {DashboardPost, DashboardPostDataSource} from '../dashboard/dashboard.component';
+import {DataSource} from '@angular/cdk/table';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../bussiness-logic/User';
 
 @Component({
   selector: 'app-chat-info',
@@ -17,7 +20,7 @@ export class ChatInfoComponent implements OnInit {
   chat: Chats;
   owner: User;
 
-  dataSource = new MembersDataSource(this.server);
+  dataSource: MembersDataSource;
   displayedColumns = ['name', 'user_id'];
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +44,18 @@ export class ChatInfoComponent implements OnInit {
         console.log(data['Chat']);
         this.chat = data['Chat'];
 
+        this.server.getChatUsers(this.chat.chat_id).subscribe(
+          data2 => {
+            console.log(data2);
+            this.dataSource = new MembersDataSource(this.server, this.chat);
+            this.dataSource = data2['Chat'];
+          },
+          error => {
+            console.log(error);
+            this.notifications.httpError(error);
+          }
+        );
+
         this.server.getSingleUser('1').subscribe(
           data2 => {
             console.log(data2);
@@ -52,6 +67,8 @@ export class ChatInfoComponent implements OnInit {
           }
         );
       });
+
+
 
   }
 
@@ -67,4 +84,13 @@ export class ChatInfoComponent implements OnInit {
   goToDashboard() {
     this.router.navigate(['dashboard']);
   }
+}
+export class MembersDataSource extends DataSource<any> {
+  constructor(private membersService: RemoteServerService, private chat: Chats) {
+    super();
+  }
+  connect(): Observable<User[]> {
+    return this.membersService.getChatUsers(this.chat.chat_id);
+  }
+  disconnect() {}
 }

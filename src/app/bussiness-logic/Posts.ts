@@ -1,9 +1,11 @@
 export class Posts {
   constructor(
-    public post_caption: string,
+    public hashtag_name: string,
+    public image_file: string,
+    public post_created_by: string,
     public post_date: string,
-    public user_id: string,
     public post_id: string,
+    public post_caption: string,
     public likes: number,
     public dislikes: number
 
@@ -11,10 +13,12 @@ export class Posts {
 
   static fromJSON(json: Object): Posts {
     return new Posts(
-      json['post_caption'],
+      json['hashtag_name'],
+      json['image_file'],
+      json['post_created_by'],
       json['post_date'],
       json['post_id'],
-      json['user_id'],
+      json['post_caption'],
       0,
       0
     );

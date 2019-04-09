@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   dataSource: UserContactsDataSource;
   contactList: User[];
   // dataSource = new UserContactsDataSource(this.server);
-  displayedColumns = ['Name', 'u_email_address'];
+  displayedColumns = ['Name', 'user_id'];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
         console.log(data);
 
         this.dataSource = new UserContactsDataSource(this.server);
-        this.dataSource = data['User'];
+        this.dataSource = data['Contact'];
        // this.contactList = data['User'];
       }
     );

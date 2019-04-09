@@ -19,9 +19,8 @@ import {DashboardPost} from '../dashboard/dashboard.component';
 export class ChatComponent implements OnInit {
 
   id: string;
-  chat: Chats;
+  public chat: Chats;
   postList: Posts[];
-  postResults: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +49,18 @@ export class ChatComponent implements OnInit {
       data => {
         console.log(data['Posts']);
         this.postList = data['Posts'];
+
+        this.postList.forEach(item => {
+          console.log(item);
+          if (item['hashtag_name'] != null) {
+            const hashtag = item['hashtag_name'];
+            const caption = item['post_caption'];
+            console.log(caption + ' #' + hashtag);
+            item['post_caption'] = caption + ' #' + hashtag;
+          }
+        });
+
+
       }
     );
 
@@ -69,12 +80,4 @@ export class ChatComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
 }
-export class MembersDataSource extends DataSource<any> {
-  constructor(private membersService: RemoteServerService) {
-    super();
-  }
-  connect(): Observable<User[]> {
-    return this.membersService.getUsers();
-  }
-  disconnect() {}
-}
+
