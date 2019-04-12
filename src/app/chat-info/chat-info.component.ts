@@ -9,6 +9,8 @@ import {DataSource} from '@angular/cdk/table';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../bussiness-logic/User';
 
+
+
 @Component({
   selector: 'app-chat-info',
   templateUrl: './chat-info.component.html',

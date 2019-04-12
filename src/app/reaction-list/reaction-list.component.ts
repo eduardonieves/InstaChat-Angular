@@ -10,12 +10,15 @@ import {DataSource} from '@angular/cdk/table';
 import {Observable} from 'rxjs/Observable';
 import {Posts} from '../bussiness-logic/Posts';
 import {UserContactsDataSource} from '../profile/profile.component';
+import {DashboardHashtagDataSource} from '../dashboard/dashboard.component';
 
 
-export interface  Reaction {
-  username: string;
-  date: string;
-  type: string;
+export class  Reaction {
+  constructor(
+    public username: string,
+  public date: string,
+  public type: string
+  ) {}
 }
 
 @Component({
@@ -30,6 +33,13 @@ export class ReactionListComponent implements OnInit {
   id: string;
   chat: Chats;
   owner: User;
+  endedFetchLikes = false;
+  endedFetchDislikes = false;
+  likesResults: any[];
+  dislikesResults: any[];
+
+  public reactsList =  Array<Reaction>();
+
 
   dataSource: ReactsSource;
   displayedColumns = ['name', 'date', 'type'];
@@ -57,18 +67,30 @@ export class ReactionListComponent implements OnInit {
 
     this.server.getPostUserReactions(this.id, 'like').subscribe(
       data => {
+        this.endedFetchLikes = false;
         console.log(data['User']);
-        // this.chat = data['Chat'][];
-       // this.dataSource = new ReactsSource(this.server, this.id , 'like');
-
+        this.likesResults = data['User'];
+        this.likesResults.forEach(item => {
+          console.log(item);
+          const like = new Reaction(item['first_name'] + ' ' + item['last_name'], item['react_date'], 'like' );
+          this.reactsList.push(like);
+        });
+       this.endedFetchLikes = true;
       });
     this.server.getPostUserReactions(this.id, 'dislike').subscribe(
       data => {
+        this.endedFetchDislikes = false;
         console.log(data['User']);
-        // this.chat = data['Chat'][];
-       // this.dataSource = new ReactsSource(this.server, this.id , 'like');
-
+        this.dislikesResults = data['User'];
+        this.dislikesResults.forEach(item => {
+          console.log(item);
+          const dislike = new Reaction(item['first_name'] + ' ' + item['last_name'], item['react_date'], 'dislike' );
+          this.reactsList.push(dislike);
+        });
+       this.endedFetchDislikes = true;
       });
+    // this.endedFetch = true;
+
   }
 
   backToChat() {
