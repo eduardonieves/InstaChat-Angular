@@ -112,9 +112,9 @@ export class RemoteServerService {
   }
 
 
-  public getTrendingHashtags(date: string): Observable<[DashboardHashtag[]]> {
+  public getTrendingHashtags(date: string): Observable<DashboardHashtag[]> {
     return this.http
-      .get<[DashboardHashtag[]]>(
+      .get<DashboardHashtag[]>(
         'http://localhost:5000/InstaChat/dashboard/' + date + '/hashtags'
       );
   }

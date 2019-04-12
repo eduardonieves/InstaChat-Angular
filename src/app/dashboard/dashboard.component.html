@@ -33,14 +33,14 @@
     <mat-card-title>Trending Hashtags</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-table [dataSource]="hashtagSource">
+    <mat-table *ngIf="endedFetch" [dataSource]="hashtagList">
       <ng-container matColumnDef="hash_name">
         <mat-header-cell *matHeaderCellDef> Hashtag </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element['Hashtag'][0]['hash_name']}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.hash_name}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="position">
         <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element['Hashtag'][0]['position']}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="hashtagsColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: hashtagsColumns;"></mat-row>

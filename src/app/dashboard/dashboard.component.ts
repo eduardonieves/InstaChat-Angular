@@ -7,18 +7,18 @@ import { User } from './../bussiness-logic/User';
 import { Observable } from 'rxjs/Observable';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource} from '@angular/material';
 
-
-declare var something: string;
-
 export interface DashboardPost {
   post_date: string;
   post_count: number;
 }
 
-export interface DashboardHashtag {
-  hash_name: string;
-  hashtag_id: number;
-  position: number;
+export class DashboardHashtag {
+  constructor(
+    public hash_name: string,
+    public hashtag_id: number,
+    public position: number
+
+  ) { }
 }
 
 @Component({
@@ -31,8 +31,11 @@ export class DashboardComponent implements OnInit {
   dataSource = new DashboardPostDataSource(this.server);
   hashtagSource: DashboardHashtagDataSource;
 
-  //
-  // public hashtagList = new Array();
+  endedFetch = false;
+  hashtagsResults: any[];
+ // public hashtagList =  Array<DashboardHashtag>();
+  public hashtagList =  Array<DashboardHashtagDataSource>();
+
   hashtagsColumns = ['hash_name', 'position'];
   displayedColumns = ['date', 'posts'];
   results: any[];
@@ -56,17 +59,18 @@ export class DashboardComponent implements OnInit {
         this.results = data['Post'];
          console.log(this.results);
         this.results.forEach(item => {
-          // const subString = item['post_date'].split('/').join('');
-          // // subString.replace('/','');
-          // console.log(subString);
-          this.hashtagSource = new DashboardHashtagDataSource(this.server, item['post_date']);
-
-         // this.hashtagList.push(this.hashtagSource['Hashtag'][0]);
 
           this.server.getTrendingHashtags(item['post_date']).subscribe(
             data2 => {
-              console.log(data2);
-          //    this.hashtagList.push(data2['Hashtag'][0]);
+              // console.log(data2);
+              this.hashtagsResults = data2['Hashtag'];
+              this.hashtagsResults.forEach(item2 => {
+                console.log(item2);
+                this.hashtagList.push(item2);
+              });
+
+              this.endedFetch = true;
+              console.log(this.hashtagList);
             });
           // until here
         });
@@ -100,11 +104,11 @@ export class DashboardPostDataSource extends DataSource<any> {
 }
 
 export class DashboardHashtagDataSource extends DataSource<any> {
-  constructor(private dashboardService: RemoteServerService, private date: string) {
+  constructor(private dashboardService: RemoteServerService) {
     super();
   }
-  connect(): Observable<[DashboardHashtag[]]> {
-    const data = this.dashboardService.getTrendingHashtags(this.date);
+  connect(): Observable<DashboardHashtag[]> {
+    const data = this.dashboardService.getTrendingHashtags('');
     return data;
   }
   disconnect() {}
