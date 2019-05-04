@@ -47,9 +47,27 @@ export class RemoteServerService {
     return this.http
       .get<User[]>(
         'http://localhost:5000/InstaChat/users'
-        // .pipe(map(data => User.fromList(data['Users'])));
       );
   }
+
+  // public register(email: string, password: string, username: string, firstName: string, lastName: string
+  // ) {
+  //   const body = {
+  //     email: email,
+  //     password: password,
+  //     username: username,
+  //     firstName: firstName,
+  //     lastName: lastName
+  //   };
+  //   return this.http
+  //     .post(
+  //       'http://localhost:5000/InstaChat/users',
+  //       body,
+  //       this.getModifiedHeader()
+  //     )
+  // }
+
+
 
   public getSingleUser(id: string): Observable<User> {
     return this.http
@@ -135,15 +153,14 @@ export class RemoteServerService {
     const body = {
       email: email,
       password: password,
-      username: firstName + '.' + lastName,
+      username: username,
       firstName: firstName,
       lastName: lastName
     };
     return this.http
       .post(
-        'http:/localhost:5000/InstaChat/register/',
-        body,
-        this.getModifiedHeader()
+        'http:/localhost:5000/InstaChat/users',
+        body
       )
       .pipe(
         map(res => {

@@ -43,12 +43,14 @@ import { ChatsListComponent } from './chatsList/chatsList.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatInfoComponent } from './chat-info/chat-info.component';
 import { ReactionListComponent } from './reaction-list/reaction-list.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent, data: { name: 'Login' } },
+  { path: 'register', component: RegisterComponent, data: { name: 'Register' } },
   { path: 'profile', component: ProfileComponent, data: { name: 'Profile' } },
   { path: 'dashboard', component: DashboardComponent, data: { name: 'Dashboard' } },
   { path: 'chatsList', component: ChatsListComponent, data: { name: 'Chats' } },
@@ -84,6 +86,7 @@ const appRoutes: Routes = [
     ChatComponent,
     ChatInfoComponent,
     ReactionListComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
